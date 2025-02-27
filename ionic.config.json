@@ -1,0 +1,7 @@
+{
+  "name": "Ionic EasyFTC",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
