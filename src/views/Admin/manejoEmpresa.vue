@@ -19,6 +19,7 @@
       <div class="offers-list">
         <ion-list>
           <ion-item v-for="(offer, index) in offers" :key="index" class="offer-item">
+            <!-- Contenido de la oferta -->
             <div class="offer-content">
               <div>
                 <h2 class="offer-title">{{ offer.title }}</h2>
@@ -131,16 +132,21 @@ ion-list {
 
 .offer-item {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
 }
 
+/* Contenido de cada oferta */
 .offer-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 12px 0;
 }
 
+/* Título y subtítulo */
 .offer-title {
   margin: 0;
   font-size: 16px;
@@ -156,6 +162,7 @@ ion-list {
 
 /* Menú desplegable debajo de la oferta */
 .offer-menu {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -165,6 +172,7 @@ ion-list {
   border-radius: 8px;
 }
 
+/* Botones de edición y eliminación */
 .edit-button {
   --background: #3880ff;
   color: white;
@@ -175,7 +183,7 @@ ion-list {
   color: white;
 }
 
-/* Botón del menú */
+/* Botón de los tres puntos */
 .menu-button {
   --padding-start: 8px;
   --padding-end: 8px;
@@ -188,7 +196,7 @@ ion-list {
   color: #666;
 }
 
-/* Content background */
+/* Fondo del contenido */
 ion-content {
   --background: #ffffff;
 }

@@ -1,69 +1,69 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-button fill="clear" class="custom-back-button" @click="goBack">
-            <img src="/back_arrow.svg" alt="Back" class="back-arrow" />
-          </ion-button>
-        </ion-buttons>
+    <ion-header class="ion-no-border">
+      <ion-toolbar class="header-toolbar">
+        <!-- Botón de Back -->
+        <ion-button fill="clear" class="custom-back-button" @click="goBack">
+          <img src="/back_arrow.svg" alt="Back" class="back-arrow" />
+        </ion-button>
         <ion-title>Manage Professor</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
-      <div class="content-container">
-        <!-- Professors Section -->
-        <div class="section professors-section">
-          <div class="action-buttons">
-            <ion-button color="danger" class="custom-button" @click="deleteSelectedProfessors">
-              Delete student
-            </ion-button>
-            <ion-button color="primary" class="custom-button">
-              Add student
-            </ion-button>
-          </div>
-
-          <div class="select-all">
-            <span>Select all</span>
-            <ion-checkbox v-model="selectAllProfessors" @ionChange="toggleSelectAllProfessors"></ion-checkbox>
-          </div>
-
-          <ion-list>
-            <ion-item v-for="professor in professors" :key="professor.id">
-              <div class="professor-item">
-                <div class="professor-info">
-                  <ion-avatar>
-                    <img :src="professor.avatar" :alt="professor.name" />
-                  </ion-avatar>
-                  <ion-label>{{ professor.name }}</ion-label>
-                </div>
-                <ion-checkbox v-model="professor.selected" class="right-checkbox"></ion-checkbox>
-              </div>
-            </ion-item>
-          </ion-list>
+      <div class="profile-container">
+        <div class="student-header">
+          <h2 class="student-name">{{ studentName }}</h2>
         </div>
 
-        <!-- Positions Section -->
-        <div class="section positions-section">
-          <ion-list>
-            <ion-item v-for="position in positions" :key="position.id">
-              <div class="position-item">
-                <div class="position-info">
-                  <h3>{{ position.title }}</h3>
-                  <p>{{ position.forStudents }}</p>
-                </div>
-                <ion-checkbox v-model="position.selected" class="right-checkbox"></ion-checkbox>
-              </div>
+        <div class="avatar-container">
+          <ion-avatar class="profile-avatar">
+            <img :src="studentAvatar" alt="Profile Image" class="avatar-img" />
+          </ion-avatar>
+        </div>
+
+        <div class="profile-details">
+          <ion-list lines="full">
+            <ion-item>
+              <ion-label position="fixed" class="detail-label">NAME</ion-label>
+              <ion-input v-if="isEditing" v-model="editableStudentName"></ion-input>
+              <ion-text v-else class="detail-value">{{ studentName }}</ion-text>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="fixed" class="detail-label">EDUCATION</ion-label>
+              <ion-input v-if="isEditing" v-model="editableStudentEducation"></ion-input>
+              <ion-text v-else class="detail-value">{{ studentEducation }}</ion-text>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="fixed" class="detail-label">STATUS</ion-label>
+              <ion-input v-if="isEditing" v-model="editableStudentStatus"></ion-input>
+              <ion-text v-else class="detail-value">{{ studentStatus }}</ion-text>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="fixed" class="detail-label">OCCUPATION</ion-label>
+              <ion-input v-if="isEditing" v-model="editableStudentOccupation"></ion-input>
+              <ion-text v-else class="detail-value">{{ studentOccupation }}</ion-text>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="fixed" class="detail-label">LOCATION</ion-label>
+              <ion-input v-if="isEditing" v-model="editableStudentLocation"></ion-input>
+              <ion-text v-else class="detail-value">{{ studentLocation }}</ion-text>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="fixed" class="detail-label">TECH. LIFESTYLE</ion-label>
+              <ion-input v-if="isEditing" v-model="editableStudentTechLifestyle"></ion-input>
+              <ion-text v-else class="detail-value">{{ studentTechLifestyle }}</ion-text>
             </ion-item>
           </ion-list>
 
-          <div class="action-buttons">
-            <ion-button color="danger" class="custom-button" @click="deleteSelectedOffers">
-              Delete offer
-            </ion-button>
-            <ion-button color="primary" class="custom-button">
-              Add offer
+          <div class="action-button-container">
+            <ion-button size="small" class="edit-button" @click="toggleEdit">
+              {{ isEditing ? 'Save' : 'Edit' }}
             </ion-button>
           </div>
         </div>
@@ -73,61 +73,71 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
+// Obtener la ruta y el router
+const route = useRoute();
 const router = useRouter();
+
+// Variables reactivas
+const isEditing = ref(false);
+
+const studentName = ref(route.query.name || 'Student X');
+const studentAvatar = route.query.avatar || '/default-avatar.png';
+const studentEducation = ref(route.query.education || 'Unknown');
+const studentStatus = ref(route.query.status || 'Active');
+const studentOccupation = ref(route.query.occupation || 'Unemployed');
+const studentLocation = ref(route.query.location || 'Not specified');
+const studentTechLifestyle = ref(route.query.techLifestyle || 'Not specified');
+
+// Variables editables
+const editableStudentName = ref(studentName.value);
+const editableStudentEducation = ref(studentEducation.value);
+const editableStudentStatus = ref(studentStatus.value);
+const editableStudentOccupation = ref(studentOccupation.value);
+const editableStudentLocation = ref(studentLocation.value);
+const editableStudentTechLifestyle = ref(studentTechLifestyle.value);
+
+// Función para alternar edición
+const toggleEdit = () => {
+  if (isEditing.value) {
+    // Guardar cambios
+    studentName.value = editableStudentName.value;
+    studentEducation.value = editableStudentEducation.value;
+    studentStatus.value = editableStudentStatus.value;
+    studentOccupation.value = editableStudentOccupation.value;
+    studentLocation.value = editableStudentLocation.value;
+    studentTechLifestyle.value = editableStudentTechLifestyle.value;
+  }
+  isEditing.value = !isEditing.value;
+};
+
+// Función para volver a "/admin/manejoProfesor"
 const goBack = () => {
-  router.go(-1);
-};
-
-const selectAllProfessors = ref(false);
-const professors = ref([
-  { id: 1, name: 'Jayden Harville', avatar: 'path/to/jayden.jpg', selected: false },
-  { id: 2, name: 'Tiana Harrell', avatar: 'path/to/tiana.jpg', selected: false },
-  { id: 3, name: 'Charlie Cabane', avatar: 'path/to/charlie.jpg', selected: false },
-  { id: 4, name: 'Ruben Stanton', avatar: 'path/to/ruben.jpg', selected: false },
-  { id: 5, name: 'Michael Jack', avatar: 'path/to/michael.jpg', selected: false },
-  { id: 6, name: 'Jon Alice', avatar: 'path/to/jon.jpg', selected: false }
-]);
-
-const toggleSelectAllProfessors = () => {
-  professors.value.forEach(professor => professor.selected = selectAllProfessors.value);
-};
-
-const deleteSelectedProfessors = () => {
-  professors.value = professors.value.filter(professor => !professor.selected);
-  selectAllProfessors.value = false;
-};
-
-watch(professors, () => {
-  selectAllProfessors.value = professors.value.length > 0 && professors.value.every(p => p.selected);
-}, { deep: true });
-
-const positions = ref([
-  { id: 1, title: 'Programmer Database', forStudents: 'For students DAM', selected: false },
-  { id: 2, title: 'UI Design', forStudents: 'For students DAM', selected: false },
-  { id: 3, title: 'Interface Developer', forStudents: 'For students DAM', selected: false },
-  { id: 4, title: 'Java programmer', forStudents: 'For students DAM', selected: false },
-  { id: 5, title: 'Laptop Technician', forStudents: 'For students ASIX', selected: false },
-  { id: 6, title: 'Programmer Python', forStudents: 'For students DAM', selected: false }
-]);
-
-const deleteSelectedOffers = () => {
-  positions.value = positions.value.filter(position => !position.selected);
+  router.push('/admin/manejoProfesor');
 };
 </script>
 
 <style scoped>
-.content-container {
-  padding: 16px;
-}
-
 /* Header styles */
-ion-toolbar {
-  --background: #f4f4f4;
+.header-toolbar {
+  --background: #f2f2f2;
+  --color: #333333;
+  --border-style: none;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
 }
 
+ion-title {
+  font-size: 18px;
+  font-weight: 600;
+  flex: 1;
+  text-align: center;
+}
+
+/* Estilo del botón de back */
 .custom-back-button {
   margin-right: 10px;
 }
@@ -137,102 +147,103 @@ ion-toolbar {
   height: 28px;
 }
 
-/* Section styles */
-.section {
-  margin-bottom: 24px;
-  background: #ffffff;
-  border-radius: 8px;
-  overflow: hidden;
+/* Content styles */
+ion-content {
+  --background: #ffffff;
 }
 
-/* Action buttons */
-.action-buttons {
+.profile-container {
   display: flex;
-  gap: 8px;
-  padding: 16px;
-  justify-content: center;
+  flex-direction: column;
+  height: 100%;
 }
 
-.custom-button {
-  --border-radius: 20px;
-  font-size: 14px;
-  text-transform: none;
+.student-header {
+  padding: 15px 20px 5px;
+  border-bottom: 1px solid #f2f2f2;
 }
 
-/* Select all checkbox */
-.select-all {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  border-bottom: 1px solid #eee;
-}
-
-/* Professor item styles */
-.professor-item, .position-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 8px 0;
-}
-
-.professor-info, .position-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Avatar */
-ion-avatar {
-  width: 40px;
-  height: 40px;
-}
-
-/* Position item styles */
-.position-info h3 {
+.student-name {
   margin: 0;
   font-size: 16px;
   font-weight: 500;
+  color: #666666;
 }
 
-.position-info p {
-  margin: 4px 0 0;
-  font-size: 14px;
-  color: #666;
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
 }
 
-/* List styles */
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  --border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-details {
+  flex: 1;
+}
+
 ion-list {
   background: transparent;
+  padding: 0;
 }
 
 ion-item {
-  --padding-start: 16px;
-  --padding-end: 16px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --inner-padding-end: 0;
   --background: transparent;
+  --border-color: #f2f2f2;
 }
 
-/* Checkbox styles */
-ion-checkbox {
-  --size: 20px;
-  --checkbox-background-checked: #3880ff;
-  --border-color: #ddd;
+.detail-label {
+  font-size: 14px;
+  color: #666666;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  min-width: 140px;
+  max-width: 140px;
+}
+
+.detail-value {
+  font-size: 14px;
+  color: #333333;
+  text-align: right;
+}
+
+.action-button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 20px;
+}
+
+.edit-button {
+  --background: #ffffff;
+  --color: #3880ff;
+  --border-color: #3880ff;
+  --border-style: solid;
+  --border-width: 1px;
   --border-radius: 4px;
-}
-
-/* Right-aligned checkboxes */
-.right-checkbox {
-  margin-left: auto;
-}
-
-/* Content background */
-ion-content {
-  --background: #f4f4f4;
-}
-
-/* Ensure proper scrolling */
-ion-content::part(scroll) {
-  padding-bottom: 24px;
+  --box-shadow: none;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  font-size: 13px;
+  font-weight: 500;
+  height: 30px;
+  text-transform: none;
 }
 </style>
