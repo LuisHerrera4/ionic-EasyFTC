@@ -78,6 +78,13 @@ const selectStudent = (index: number) => {
 </script>
 
 <style scoped>
+/* Importar Lexend */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&display=swap');
+
+* {
+  font-family: 'Lexend', sans-serif;
+}
+
 .students-container {
   display: flex;
   flex-direction: column;
@@ -92,7 +99,6 @@ const selectStudent = (index: number) => {
   background-position: center;
   background-repeat: no-repeat;
   height: 150px;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,7 +108,7 @@ const selectStudent = (index: number) => {
   color: #ffffff;
   font-size: 2rem;
   font-weight: bold;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Para mejorar la visibilidad del texto */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 /* Navigation Tabs */

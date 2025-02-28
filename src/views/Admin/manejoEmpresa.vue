@@ -1,13 +1,12 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar class="toolbar-background">
         <ion-title class="main-title">Manage Company</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
-      <!-- Contenedor del botón de Back y subtítulo -->
       <div class="header-container">
         <ion-button fill="clear" class="custom-back-button" @click="goBack">
           <img src="/back_arrow.svg" alt="Back" class="back-arrow" />
@@ -15,11 +14,9 @@
         <h2 class="sub-title">Manage offers of company</h2>
       </div>
 
-      <!-- Lista de ofertas -->
       <div class="offers-list">
         <ion-list>
           <ion-item v-for="(offer, index) in offers" :key="index" class="offer-item">
-            <!-- Contenido de la oferta -->
             <div class="offer-content">
               <div>
                 <h2 class="offer-title">{{ offer.title }}</h2>
@@ -30,7 +27,6 @@
               </ion-button>
             </div>
 
-            <!-- Menú de opciones debajo de la oferta -->
             <div v-if="activeMenuIndex === index" class="offer-menu">
               <ion-button expand="full" class="edit-button" @click="editOffer(offer)">
                 Edit
@@ -82,18 +78,28 @@ const deleteOffer = (index) => {
 </script>
 
 <style scoped>
-/* Header styles */
-ion-toolbar {
-  --background: #f4f4f4;
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap");
+
+* {
+  font-family: "Lexend", sans-serif;
+}
+
+.toolbar-background {
+  background: url('/cieloAdmin.gif') no-repeat center center / cover;
+  height: 180px;
+  --background: transparent ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-title {
   font-size: 24px;
-  font-weight: bold;
-  text-align: center;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Contenedor del botón y subtítulo */
 .header-container {
   display: flex;
   align-items: center;
@@ -110,7 +116,6 @@ ion-toolbar {
   height: 28px;
 }
 
-/* Subtítulo */
 .sub-title {
   font-size: 18px;
   font-weight: 500;
@@ -118,7 +123,6 @@ ion-toolbar {
   margin: 0;
 }
 
-/* Lista de ofertas */
 .offers-list {
   padding: 16px;
 }
@@ -138,7 +142,6 @@ ion-list {
   border-bottom: 1px solid #ddd;
 }
 
-/* Contenido de cada oferta */
 .offer-content {
   display: flex;
   justify-content: space-between;
@@ -146,7 +149,6 @@ ion-list {
   width: 100%;
 }
 
-/* Título y subtítulo */
 .offer-title {
   margin: 0;
   font-size: 16px;
@@ -160,7 +162,6 @@ ion-list {
   color: #666;
 }
 
-/* Menú desplegable debajo de la oferta */
 .offer-menu {
   width: 100%;
   display: flex;
@@ -172,7 +173,6 @@ ion-list {
   border-radius: 8px;
 }
 
-/* Botones de edición y eliminación */
 .edit-button {
   --background: #3880ff;
   color: white;
@@ -183,7 +183,6 @@ ion-list {
   color: white;
 }
 
-/* Botón de los tres puntos */
 .menu-button {
   --padding-start: 8px;
   --padding-end: 8px;
@@ -196,7 +195,6 @@ ion-list {
   color: #666;
 }
 
-/* Fondo del contenido */
 ion-content {
   --background: #ffffff;
 }

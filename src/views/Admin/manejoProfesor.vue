@@ -1,53 +1,48 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar class="custom-toolbar">
-        <ion-title class="center-title">Manage Professor</ion-title>
+      <ion-toolbar class="toolbar-background">
+        <ion-title class="main-title">Manage Professor</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
-      <div class="content-container">
-        <!-- Botón de Back -->
-        <div class="back-button-container">
-          <ion-button fill="clear" class="custom-back-button" @click="goBack">
-            <img src="/back_arrow.svg" alt="Back" class="back-arrow" />
-          </ion-button>
-        </div>
+      <div class="header-container">
+        <ion-button fill="clear" class="custom-back-button" @click="goBack">
+          <img src="/back_arrow.svg" alt="Back" class="back-arrow" />
+        </ion-button>
+        <h2 class="sub-title">Manage professor and students</h2>
+      </div>
 
-        <!-- Professors Section -->
-        <div class="section professors-section">
-          <ion-list>
-            <ion-item v-for="professor in professors" :key="professor.id">
-              <div class="professor-item" @click="goToStudentProfile(professor)">
-                <ion-avatar>
-                  <img :src="professor.avatar" :alt="professor.name" />
-                </ion-avatar>
-                <ion-label>{{ professor.name }}</ion-label>
-              </div>
-              <!-- Checkbox alineado a la derecha -->
-              <ion-checkbox slot="end" v-model="professor.selected" @click.stop></ion-checkbox>
-            </ion-item>
-          </ion-list>
-        </div>
+      <div class="section professors-section">
+        <ion-list>
+          <ion-item v-for="professor in professors" :key="professor.id">
+            <div class="professor-item" @click="goToStudentProfile(professor)">
+              <ion-avatar>
+                <img :src="professor.avatar" :alt="professor.name" />
+              </ion-avatar>
+              <ion-label>{{ professor.name }}</ion-label>
+            </div>
+            <ion-checkbox slot="end" v-model="professor.selected" @click.stop></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </div>
 
-        <!-- Botones de acción -->
-        <div class="action-buttons">
-          <ion-button color="danger" class="custom-button" @click="deleteSelectedProfessors">
-            Delete student
-          </ion-button>
-          <ion-button color="primary" class="custom-button" @click="addStudent">
-            Add student
-          </ion-button>
-        </div>
+      <div class="action-buttons">
+        <ion-button color="danger" class="custom-button" @click="deleteSelectedProfessors">
+          Delete Student
+        </ion-button>
+        <ion-button color="primary" class="custom-button" @click="addStudent">
+          Add Student
+        </ion-button>
       </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 
@@ -56,60 +51,61 @@ const goBack = () => {
 };
 
 const professors = ref([
-  { id: 1, name: 'Jayden Harville', avatar: '/usuario1.jpg', selected: false },
-  { id: 2, name: 'Tiana Harrell', avatar: 'usuario2.jpg', selected: false },
-  { id: 3, name: 'Charlie Cabane', avatar: '/usuario3.png', selected: false },
-  { id: 4, name: 'Ruben Stanton', avatar: 'usuario4.jpeg', selected: false },
-  { id: 5, name: 'Michael Jack', avatar: '/usuario1.jpg', selected: false },
-  { id: 6, name: 'Jon Alice', avatar: '/usuario3.png', selected: false }
+  { id: 1, name: "Jayden Harville", avatar: "/usuario1.jpg", selected: false },
+  { id: 2, name: "Tiana Harrell", avatar: "usuario2.jpg", selected: false },
+  { id: 3, name: "Charlie Cabane", avatar: "/usuario3.png", selected: false },
+  { id: 4, name: "Ruben Stanton", avatar: "usuario4.jpeg", selected: false },
+  { id: 5, name: "Michael Jack", avatar: "/usuario1.jpg", selected: false },
+  { id: 6, name: "Jon Alice", avatar: "/usuario3.png", selected: false },
 ]);
 
 const goToStudentProfile = (student) => {
   router.push({
-    path: '/admin/manejoProfesorAlumnos',
-    query: { 
-      id: student.id, 
-      name: student.name, 
-      avatar: student.avatar 
-    }
+    path: "/admin/manejoProfesorAlumnos",
+    query: {
+      id: student.id,
+      name: student.name,
+      avatar: student.avatar,
+    },
   });
 };
 
-// Función para eliminar profesores seleccionados
 const deleteSelectedProfessors = () => {
-  professors.value = professors.value.filter(professor => !professor.selected);
+  professors.value = professors.value.filter((professor) => !professor.selected);
 };
 
-// Función para agregar un nuevo estudiante
 const addStudent = () => {
-  router.push({ path: '/admin/manejoProfesorAlumnos', query: { newStudent: true } });
+  router.push({ path: "/admin/manejoProfesorAlumnos", query: { newStudent: true } });
 };
 </script>
 
 <style scoped>
-.content-container {
-  padding: 16px;
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap");
+
+* {
+  font-family: "Lexend", sans-serif;
 }
 
-/* Estilos para el toolbar */
-.custom-toolbar {
-  --background: #f4f4f4;
-  min-height: 80px;
+.toolbar-background {
+  background: url("/cieloAdmin.gif") no-repeat center center / cover;
+  height: 180px;
+  --background: transparent;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
-.center-title {
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
+.main-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.back-button-container {
+.header-container {
   display: flex;
-  justify-content: flex-start;
-  padding: 10px 16px;
+  align-items: center;
+  padding: 16px;
 }
 
 .custom-back-button {
@@ -121,24 +117,19 @@ const addStudent = () => {
   height: 28px;
 }
 
+.sub-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
 .section {
-  margin-bottom: 24px;
+  margin: 12px 16px;
   background: #ffffff;
   border-radius: 8px;
   overflow: hidden;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 8px;
-  padding: 16px;
-  justify-content: center;
-}
-
-.custom-button {
-  --border-radius: 20px;
-  font-size: 14px;
-  text-transform: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .professor-item {
@@ -154,7 +145,9 @@ ion-avatar {
 }
 
 ion-list {
-  background: transparent;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 ion-item {
@@ -171,5 +164,18 @@ ion-checkbox {
   --checkbox-background-checked: #3880ff;
   --border-color: #ddd;
   --border-radius: 4px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+  justify-content: center;
+}
+
+.custom-button {
+  --border-radius: 20px;
+  font-size: 14px;
+  text-transform: none;
 }
 </style>

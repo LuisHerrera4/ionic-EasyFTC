@@ -1,10 +1,9 @@
 <template>
   <ion-page>
     <ion-header>
-     
-
       <!-- Nuevo fondo animado (GIF) debajo del título HELP -->
-      <div class="gif-background">        <ion-title class="tituloh">HELP</ion-title>
+      <div class="gif-background">
+        <ion-title class="tituloh">HELP</ion-title>
       </div>
 
       <!-- Tabs Navigation -->
@@ -33,10 +32,12 @@
         @swiper="setSwiperRef"
         @slideChange="handleSlideChange"
       >
-        <!-- Frequent Questions -->
+        
+
+        <!-- Help Section (Frequently Asked Questions) -->
         <swiper-slide>
           <div class="slide-content">
-            <h2 class="section-title">Frequent questions</h2>
+            <h2 class="section-title">Help - Frequently Asked Questions</h2>
             <ion-list lines="full">
               <ion-item v-for="(question, index) in frequentQuestions" :key="index">
                 <ion-label>{{ question }}</ion-label>
@@ -45,61 +46,55 @@
           </div>
         </swiper-slide>
 
-        <!-- Opening Hours -->
+        <!-- Support Hours -->
         <swiper-slide>
           <div class="slide-content">
-            <h2 class="section-title">Opening hours</h2>
+            <h2 class="section-title">Support Hours</h2>
             <ion-list lines="full">
               <ion-item>
                 <ion-label>
-                  <h2>9:00 AM - 13:00 PM</h2>
-                  <p>Tickets</p>
+                  <h2>9:00 AM - 1:00 PM</h2>
+                  <p>Tickets Assistance</p>
                 </ion-label>
               </ion-item>
               <ion-item>
                 <ion-label>
                   <h2>10:00 AM - 11:00 AM</h2>
-                  <p>Update schedule</p>
+                  <p>Schedule Updates</p>
                 </ion-label>
               </ion-item>
               <ion-item>
                 <ion-label>
-                  <h2>8:00 AM - 14:00 PM</h2>
-                  <p>Practices</p>
+                  <h2>8:00 AM - 2:00 PM</h2>
+                  <p>Practice Support</p>
                 </ion-label>
               </ion-item>
               <ion-item>
                 <ion-label>
-                  <h2>19:00 AM - 20:30 PM</h2>
-                  <p>Schedule call professor</p>
+                  <h2>7:00 PM - 8:30 PM</h2>
+                  <p>Professor Calls</p>
                 </ion-label>
               </ion-item>
               <ion-item>
                 <ion-label>
-                  <h2>8:00 AM - 14:00 PM</h2>
-                  <p>Schedule call company</p>
+                  <h2>8:00 AM - 2:00 PM</h2>
+                  <p>Company Calls</p>
                 </ion-label>
               </ion-item>
               <ion-item>
                 <ion-label>
-                  <h2>16:00 PM - 19:00 PM</h2>
-                  <p>Chat with an agent</p>
-                </ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label>
-                  <h2>Never</h2>
-                  <p>Cheater</p>
+                  <h2>4:00 PM - 7:00 PM</h2>
+                  <p>Live Chat with an Agent</p>
                 </ion-label>
               </ion-item>
             </ion-list>
           </div>
         </swiper-slide>
 
-        <!-- Chat with an agent -->
-        <swiper-slide>
+         <!-- Chat with an Agent (This section remains unchanged) -->
+         <swiper-slide>
           <div class="slide-content">
-            <h2 class="section-title">Chat with an agent</h2>
+            <h2 class="section-title">Chat with an Agent</h2>
             <div class="chat-container">
               <div class="chat-message">
                 <div class="avatar">
@@ -123,7 +118,7 @@
                     <span class="sender-name">Allison Seris</span>
                     <span class="message-time">25 mins ago</span>
                   </div>
-                  <p>Hi, Tiana I have a big! problem, I don't how create a variant. Can u help me.</p>
+                  <p>Hi, Tiana I have a big! problem, I don't know how to create a variant. Can you help me?</p>
                 </div>
               </div>
 
@@ -136,7 +131,7 @@
                     <span class="sender-name">Tiana Saris</span>
                     <span class="message-time">18 mins ago</span>
                   </div>
-                  <p>Hi, in variant section you have an option to create the component and when you have the option to give new variant</p>
+                  <p>Hi, in the variant section you have an option to create the component and then add a new variant.</p>
                 </div>
               </div>
 
@@ -149,7 +144,7 @@
                     <span class="sender-name">Allison Seris</span>
                     <span class="message-time">17 mins ago</span>
                   </div>
-                  <p>A lo true, thank you very much. Now I can continue with my project</p>
+                  <p>Oh true, thank you very much. Now I can continue with my project.</p>
                 </div>
               </div>
             </div>
@@ -172,11 +167,10 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem } from '@ionic/vue';
+import { IonPage, IonHeader, IonTitle, IonContent, IonList, IonItem } from '@ionic/vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 
-// Data
 const activeIndex = ref(0);
 const swiperInstance = ref(null);
 
@@ -191,7 +185,6 @@ const frequentQuestions = ref([
   'How to access the company\'s data?'
 ]);
 
-// Methods
 const setSwiperRef = (swiper) => {
   swiperInstance.value = swiper;
 };
@@ -210,7 +203,6 @@ const goToSlide = (index) => {
 
 onMounted(() => {});
 </script>
-
 <style scoped>
 /* Tabs Navigation */
 

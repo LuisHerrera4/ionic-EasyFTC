@@ -6,7 +6,7 @@
         <p>Publicando . . .</p>
       </div>
       <div v-else class="offers-container">
-        <!-- Header con navegaciones del Código 1 -->
+        <!-- Header con navegación -->
         <div class="offers-header">
           <h1>OFFERS</h1>
         </div>
@@ -36,7 +36,7 @@
           </button>
         </div>
 
-        <!-- Form Content -->
+        <!-- Form Content (AHORA MÁS ARRIBA) -->
         <div class="form-content">
           <div class="form-card">
             <h2 class="form-title">Create New Offer</h2>
@@ -52,8 +52,8 @@
             </div>
             
             <div class="form-group">
+              <ion-label class="custom-label">Description</ion-label>
               <ion-item class="custom-textarea">
-                <ion-label position="floating">Description</ion-label>
                 <ion-textarea 
                   placeholder="Describe the offer in detail" 
                   rows="4"
@@ -81,10 +81,10 @@
               ></ion-input>
             </div>
             
-            <div class="form-group">
+            <div class="form-group vacancy-group">
+              <ion-label class="vacancy-label">Vacancies</ion-label>
               <ion-item class="custom-select">
-                <ion-label position="floating">Vacancies</ion-label>
-                <ion-select interface="popover">
+                <ion-select interface="popover" class="vacancy-select">
                   <ion-select-option value="1">1</ion-select-option>
                   <ion-select-option value="2">2</ion-select-option>
                   <ion-select-option value="3">3+</ion-select-option>
@@ -94,7 +94,6 @@
 
             <div class="button-container">
               <ion-button expand="block" class="publish-button" @click="publishOffer">
-                <ion-icon name="paper-plane-outline" slot="start"></ion-icon>
                 Publish Offer
               </ion-button>
             </div>
@@ -112,7 +111,13 @@ import {
   IonPage, 
   IonContent, 
   IonButton, 
-  IonSpinner 
+  IonSpinner,
+  IonInput, 
+  IonTextarea, 
+  IonItem, 
+  IonLabel, 
+  IonSelect, 
+  IonSelectOption
 } from '@ionic/vue';
 
 const activeTab = ref('offers');
@@ -130,19 +135,15 @@ const publishOffer = () => {
     router.push('/empresa/ofertase');
   }, 1500);
 };
-
-import { 
-  IonInput, 
-  IonTextarea, 
-  IonItem, 
-  IonLabel, 
-  IonSelect, 
-  IonSelectOption, 
-  IonIcon
-} from '@ionic/vue';
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap');
+
+* {
+  font-family: 'Lexend', sans-serif;
+}
+
 .loading-screen {
   display: flex;
   flex-direction: column;
@@ -156,10 +157,6 @@ import {
   left: 0;
 }
 
-.botonn {
-  margin-top: 10%;
-}
-
 .offers-container {
   display: flex;
   flex-direction: column;
@@ -169,18 +166,16 @@ import {
 
 .offers-header {
   background: url('/nubes.gif') center/cover no-repeat; 
-  height: 150px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .offers-header h1 {
-  color: #000000;
-  font-size: 2.5rem;
+  color: white;
+  font-size: 2.2rem;
   font-weight: bold;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Navigation Tabs */
@@ -188,7 +183,6 @@ import {
   display: flex;
   justify-content: space-between;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
@@ -198,108 +192,74 @@ import {
   align-items: center;
   gap: 8px;
   padding: 0.75rem 1.25rem;
-  border-radius: 0.5rem;
   font-weight: 500;
-  color: #666666;
+  color: #666;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.tab-button:hover {
-  background-color: #f3f4f6;
 }
 
 .tab-button.active {
   background-color: #ebf2fe;
   color: #1d4ed8;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.tab-icon {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-/* Form Content */
+/* FORM CONTENT MÁS ARRIBA */
 .form-content {
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: -20px; /* Eleva el formulario */
 }
 
 .form-card {
   background-color: white;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
   width: 100%;
-  max-width: 600px;
-  text-align: center;
+  max-width: 550px;
 }
 
-.button-container {
-  display: flex;
-  justify-content: center;
-  padding-top: 1.5rem;
+.form-group {
+  margin-bottom: 0.8rem;
+  width: 100%;
+  text-align: left;
 }
 
-@media (max-width: 640px) {
-  .form-card {
-    padding: 1.5rem;
-  }
-  
-  .nav-tabs {
-    padding: 0.75rem;
-  }
-  
-  .tab-button {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-  }
-  
-
-  .tab-icon {
-    width: 18px;
-    height: 18px;
-  }
-}
-
-.loading-screen p {
-  margin-top: 10px;
-  font-size: 1.2rem;
+.custom-label {
+  font-size: 1rem;
+  font-weight: 500;
   color: #333;
+  display: block;
+  margin-bottom: 5px;
 }
 
-.offers-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #f9fafb;
-}
-
-.offers-header {
-  background: url('/nubes.gif') center/cover no-repeat; 
-  height: 150px;
+/* Alinear Vacancies */
+.vacancy-group {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-.offers-header h1 {
-  color: white;
-  font-size: 2.5rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.vacancy-label {
+  font-weight: 500;
+}
+
+.vacancy-select {
+  min-width: 120px;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
-  padding-top: 1.5rem;
+  padding-top: 1rem;
+}
+
+.publish-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

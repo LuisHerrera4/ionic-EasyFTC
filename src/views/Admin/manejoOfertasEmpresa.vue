@@ -1,16 +1,18 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar class="toolbar-background">
         <ion-title class="main-title">Manage Company</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
       <!-- Back Navigation -->
-      <div class="back-navigation" @click="goBack">
-        <img src="/back_arrow.svg" alt="Back" class="back-arrow" />
-        <span class="sub-title">Manage offers of company</span>
+      <div class="header-container">
+        <ion-button fill="clear" class="custom-back-button" @click="goBack">
+          <img src="/back_arrow.svg" alt="Back" class="back-arrow" />
+        </ion-button>
+        <h2 class="sub-title">Manage offers of company</h2>
       </div>
 
       <div class="form-container">
@@ -47,7 +49,7 @@
           <ion-checkbox v-model="deleteFlags.vacancies"></ion-checkbox>
         </div>
 
-        <!-- Dynamic Year Parameter (Solo uno) -->
+        <!-- Dynamic Year Parameter -->
         <div v-if="yearParameter !== null" class="form-group">
           <ion-datetime v-model="yearParameter" display-format="YYYY" placeholder="Select Year"></ion-datetime>
           <ion-checkbox v-model="deleteFlags.year"></ion-checkbox>
@@ -71,26 +73,12 @@
 
 <script setup>
 import { ref } from "vue";
-import { useRouter } from "vue-router"; // 🚀 Importa Vue Router
-import { 
-  IonPage,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonInput,
-  IonTextarea,
-  IonCheckbox,
-  IonButton,
-  IonLabel,
-  IonDatetime
-} from '@ionic/vue';
+import { useRouter } from "vue-router";
 
-const router = useRouter(); // 📌 Instancia de Vue Router
+const router = useRouter();
 
-// Función para volver atrás
 const goBack = () => {
-  router.back(); // 🔙 Retrocede a la página anterior
+  router.back();
 };
 
 const offerTitle = ref("");
@@ -98,7 +86,7 @@ const offerDescription = ref("");
 const skillsRequired = ref("");
 const direction = ref("");
 const vacancies = ref("");
-const yearParameter = ref(null); // Solo se permite un año
+const yearParameter = ref(null);
 
 const deleteFlags = ref({
   title: false,
@@ -106,12 +94,12 @@ const deleteFlags = ref({
   skills: false,
   direction: false,
   vacancies: false,
-  year: false
+  year: false,
 });
 
 const addParameter = () => {
   if (yearParameter.value === null) {
-    yearParameter.value = ""; // Agrega un campo vacío para año
+    yearParameter.value = "";
   }
 };
 
@@ -121,8 +109,6 @@ const deleteSelectedFields = () => {
   if (deleteFlags.value.skills) skillsRequired.value = "";
   if (deleteFlags.value.direction) direction.value = "";
   if (deleteFlags.value.vacancies) vacancies.value = "";
-  
-  // Eliminar completamente el campo "Year" si su checkbox está marcado
   if (deleteFlags.value.year) {
     yearParameter.value = null;
     deleteFlags.value.year = false;
@@ -131,38 +117,55 @@ const deleteSelectedFields = () => {
 </script>
 
 <style scoped>
-ion-toolbar {
-  --background: #f4f4f4;
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap");
+
+* {
+  font-family: "Lexend", sans-serif;
+}
+
+/* Hacer que el GIF sea el fondo del toolbar */
+.toolbar-background {
+  background: url('/cieloAdmin.gif') no-repeat center center / cover;
+  height: 180px;
+  --background: transparent ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-title {
   font-size: 24px;
-  font-weight: bold;
-  padding: 10px 16px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Back Navigation */
-.back-navigation {
+.header-container {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 20px;
-  padding-left: 16px;
-  cursor: pointer;
+  padding: 16px;
+}
+
+.custom-back-button {
+  margin-right: 10px;
 }
 
 .back-arrow {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
 
 .sub-title {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
 }
 
 /* Form styles */
 .form-container {
-  padding: 20px;
+  padding: 16px;
 }
 
 .form-group {
@@ -213,13 +216,8 @@ ion-checkbox {
   --border-radius: 4px;
 }
 
-/* Button styles */
-.add-param-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 12px;
-}
-
+/* Botones */
+.add-param-container,
 .delete-container {
   display: flex;
   justify-content: center;
@@ -244,7 +242,7 @@ ion-button {
   font-size: 14px;
 }
 
-/* Content background */
+/* Fondo del contenido */
 ion-content {
   --background: #ffffff;
 }

@@ -1,19 +1,19 @@
 <template>
   <ion-page>
-    <!-- Header con título "CONTACT AREA" -->
-    <div class="header">
-      <h1>CONTACT AREA</h1>
-    </div>
+    <!-- 🔹 Header con fondo GIF -->
+    <ion-header>
+      <ion-toolbar class="custom-toolbar">
+        <ion-title class="ion-text-center large-title">CONTACT AREA</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
     <ion-content class="ion-padding">
-      <!-- Botón de retroceso -->
       <div class="back-container">
         <button class="back-button" @click="goBack">
           <img src="/back_arrow.svg" alt="Volver" class="back-icon" />
         </button>
       </div>
 
-      <!-- Sección de Queries -->
       <div class="section-container">
         <div class="section-title">
           <h2>Queries</h2>
@@ -27,7 +27,6 @@
         </ion-card>
       </div>
 
-      <!-- Sección de Reports -->
       <div class="section-container">
         <div class="section-title">
           <h2>Reports</h2>
@@ -46,7 +45,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { IonPage, IonContent, IonCard, IonTextarea } from "@ionic/vue";
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonTextarea } from "@ionic/vue";
 
 const router = useRouter();
 
@@ -56,24 +55,29 @@ const goBack = () => {
 </script>
 
 <style scoped>
-/* Encabezado */
-.header {
-  background-color: #a9a9a9;
-  height: 180px;
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap');
+
+* {
+  font-family: 'Lexend', sans-serif;
+}
+
+.custom-toolbar {
+  --min-height: 150px;
+  background: url('/cielo.gif') no-repeat center center;
+  background-size: cover;
+  --background: transparent;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: center;
 }
 
-.header h1 {
-  font-size: 32px;
-  font-weight: 600;
-  color: #000;
-  margin: 0;
+.large-title {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  padding: 20px 0;
 }
 
-/* Botón de retroceso */
 .back-container {
   display: flex;
   justify-content: flex-start;
@@ -98,12 +102,10 @@ const goBack = () => {
   height: 24px;
 }
 
-/* Sección general */
 .section-container {
   margin-bottom: 30px;
 }
 
-/* Título de sección */
 .section-title {
   background-color: #f2f2f2;
   border-radius: 30px;
@@ -119,7 +121,6 @@ const goBack = () => {
   color: #454545;
 }
 
-/* Caja de texto */
 .feedback-card {
   margin: 0;
   border-radius: 12px;
@@ -136,7 +137,6 @@ ion-textarea {
   color: #4b5563;
 }
 
-/* Placeholder */
 ion-textarea::part(placeholder) {
   color: #4b5563;
   opacity: 0.7;

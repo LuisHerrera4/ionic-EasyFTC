@@ -2,13 +2,15 @@
   <ion-page>
     <ion-header class="ion-no-border">
       <ion-toolbar class="header-toolbar">
-        <!-- Botón de Back -->
-        <ion-button fill="clear" class="custom-back-button" @click="goBack">
-          <img src="/back_arrow.svg" alt="Back" class="back-arrow" />
-        </ion-button>
         <ion-title>Manage Professor</ion-title>
       </ion-toolbar>
     </ion-header>
+
+    <div class="back-button-container">
+      <ion-button fill="clear" class="custom-back-button" @click="goBack">
+        <img src="/back_arrow.svg" alt="Back" class="back-arrow" />
+      </ion-button>
+    </div>
 
     <ion-content>
       <div class="profile-container">
@@ -76,11 +78,9 @@
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-// Obtener la ruta y el router
 const route = useRoute();
 const router = useRouter();
 
-// Variables reactivas
 const isEditing = ref(false);
 
 const studentName = ref(route.query.name || 'Student X');
@@ -91,7 +91,6 @@ const studentOccupation = ref(route.query.occupation || 'Unemployed');
 const studentLocation = ref(route.query.location || 'Not specified');
 const studentTechLifestyle = ref(route.query.techLifestyle || 'Not specified');
 
-// Variables editables
 const editableStudentName = ref(studentName.value);
 const editableStudentEducation = ref(studentEducation.value);
 const editableStudentStatus = ref(studentStatus.value);
@@ -99,10 +98,8 @@ const editableStudentOccupation = ref(studentOccupation.value);
 const editableStudentLocation = ref(studentLocation.value);
 const editableStudentTechLifestyle = ref(studentTechLifestyle.value);
 
-// Función para alternar edición
 const toggleEdit = () => {
   if (isEditing.value) {
-    // Guardar cambios
     studentName.value = editableStudentName.value;
     studentEducation.value = editableStudentEducation.value;
     studentStatus.value = editableStudentStatus.value;
@@ -113,33 +110,46 @@ const toggleEdit = () => {
   isEditing.value = !isEditing.value;
 };
 
-// Función para volver a "/admin/manejoProfesor"
 const goBack = () => {
   router.push('/admin/manejoProfesor');
 };
 </script>
 
 <style scoped>
-/* Header styles */
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap");
+
+* {
+  font-family: "Lexend", sans-serif;
+}
+
 .header-toolbar {
-  --background: #f2f2f2;
-  --color: #333333;
-  --border-style: none;
+  background: url("/cieloAdmin.gif") no-repeat center center / cover;
+  height: 180px;
+  --background: transparent;
   display: flex;
   align-items: center;
-  padding-left: 10px;
+  justify-content: center;
 }
 
 ion-title {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
-  flex: 1;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   text-align: center;
 }
 
-/* Estilo del botón de back */
+.back-button-container {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px 16px;
+  background: #ffffff;
+}
+
 .custom-back-button {
-  margin-right: 10px;
+  padding: 0;
+  width: 36px;
+  height: 36px;
 }
 
 .back-arrow {
@@ -147,7 +157,6 @@ ion-title {
   height: 28px;
 }
 
-/* Content styles */
 ion-content {
   --background: #ffffff;
 }
@@ -165,9 +174,9 @@ ion-content {
 
 .student-name {
   margin: 0;
-  font-size: 16px;
-  font-weight: 500;
-  color: #666666;
+  font-size: 18px;
+  font-weight: 600;
+  color: #444;
 }
 
 .avatar-container {
@@ -177,8 +186,8 @@ ion-content {
 }
 
 .profile-avatar {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   --border-radius: 50%;
   background: #f5f5f5;
   display: flex;
@@ -212,16 +221,15 @@ ion-item {
 
 .detail-label {
   font-size: 14px;
-  color: #666666;
+  color: #666;
   font-weight: 500;
-  letter-spacing: 0.5px;
   min-width: 140px;
   max-width: 140px;
 }
 
 .detail-value {
   font-size: 14px;
-  color: #333333;
+  color: #333;
   text-align: right;
 }
 
@@ -235,12 +243,9 @@ ion-item {
   --background: #ffffff;
   --color: #3880ff;
   --border-color: #3880ff;
-  --border-style: solid;
   --border-width: 1px;
   --border-radius: 4px;
   --box-shadow: none;
-  --padding-start: 15px;
-  --padding-end: 15px;
   font-size: 13px;
   font-weight: 500;
   height: 30px;

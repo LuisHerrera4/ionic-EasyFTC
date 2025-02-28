@@ -9,8 +9,7 @@ import AlumnosInicio from '../views/Login/Alumnos/Inicio.vue';
 import AdminLogin from '../views/Login/Admin/Login.vue';
 
 // Importar las vistas de Login y Register
-import AlumnosLogin from '../views/Login/Alumnos/Login.vue';
-import AlumnosRegister from '../views/Login/Alumnos/Register.vue';
+
 
 import EmpresaLogin from '../views/Login/Empresa/Login.vue';
 import EmpresaRegister from '../views/Login/Empresa/Register.vue';
@@ -27,9 +26,6 @@ import FacebookLoginProfesor from '../views/Login/Profesor/Facebook.vue'
 import GoogleLoginProfesor from '../views/Login/Profesor/Google.vue'
 import AppleLoginProfesor from '../views/Login/Profesor/Apple.vue'
 
-import FacebookLoginAlumnos from '../views/Login/Alumnos/Facebook.vue'
-import GoogleLoginAlumnos from '../views/Login/Alumnos/Google.vue'
-import AppleLoginAlumnos from '../views/Login/Alumnos/Apple.vue'
 
 
 //Imports Pantallas Empresa
@@ -77,11 +73,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'ProfesorInicio',
     component: ProfesorInicio
   },
-  {
-    path: '/login/alumno/inicio',
-    name: 'AlumnosInicio',
-    component: AlumnosInicio
-  },
+
   {
     path: '/login/admin/inicio',
     name: 'AdminLogin',
@@ -120,35 +112,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login/profesor/Apple',
     name: 'AppleLoginProfesor',
     component: AppleLoginProfesor
-  },
-
-  //Alumno
-  {
-    path: '/login/alumnos/Facebook',
-    name: 'FacebookLoginAlumnos',
-    component: FacebookLoginAlumnos
-  },
-  {
-    path: '/login/alumnos/Google',
-    name: 'GoogleLoginAlumnos',
-    component: GoogleLoginAlumnos
-  },
-  {
-    path: '/login/alumnos/Apple',
-    name: 'AppleLoginAlumnos',
-    component: AppleLoginAlumnos
-  },
-
-  // Rutas para Alumnos
-  {
-    path: '/login/alumnos/login',
-    name: 'AlumnosLogin',
-    component: AlumnosLogin
-  },
-  {
-    path: '/login/alumnos/register',
-    name: 'AlumnosRegister',
-    component: AlumnosRegister
   },
 
   // Rutas para Empresas

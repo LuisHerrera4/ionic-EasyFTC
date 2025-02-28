@@ -1,23 +1,27 @@
 <template>
   <ion-page>
-    <div class="header">
-      <h1>STUDENT</h1>
-    </div>
+    <!-- 🔹 Header con fondo GIF -->
+    <ion-header>
+      <ion-toolbar class="custom-toolbar">
+        <ion-title class="ion-text-center large-title">STUDENT</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
     <ion-content class="ion-padding">
+      <!-- 🔹 Botón de retroceso -->
       <ion-button fill="clear" class="custom-back-button" @click="goBack">
         <img src="/back_arrow.svg" alt="back_arrow" class="back-arrow" />
       </ion-button>
 
-      <!-- Imagen del estudiante -->
-      <div class="student-image-container">
-        <img :src="student.image" alt="Student Image" class="student-image" />
+      <!-- 🔹 Imagen del estudiante con Zoom -->
+      <div class="student-image-container" v-if="student.image">
+        <img ref="zoomableImage" :src="student.image" alt="Student Image" class="student-image" />
       </div>
 
-      <!-- Nombre del estudiante -->
+      <!-- 🔹 Nombre del estudiante -->
       <h2 class="student-name">{{ student.name }}</h2>
 
-      <!-- Información del estudiante -->
+      <!-- 🔹 Información del estudiante -->
       <div class="info-container">
         <div class="info-row">
           <div class="info-label">AGE</div>
@@ -54,32 +58,67 @@
 </template>
 
 <script setup>
-import { IonPage, IonContent, IonButton } from "@ionic/vue";
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from "@ionic/vue";
+import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import mediumZoom from "medium-zoom"; // 📌 Importamos la librería de zoom
 
 const router = useRouter();
-const route = useRoute(); 
+const route = useRoute();
+const zoomableImage = ref(null);
 
 const goBack = () => {
   router.go(-1);
 };
 
 const student = { ...route.query };
+
+onMounted(() => {
+  if (zoomableImage.value) {
+    mediumZoom(zoomableImage.value, { margin: 20, background: "rgba(0, 0, 0, 0.8)" });
+  }
+});
 </script>
 
 <style scoped>
-.header {
-  background-color: #a9a9a9;
-  height: 180px;
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap');
+
+* {
+  font-family: 'Lexend', sans-serif;
+}
+
+.custom-toolbar {
+  --min-height: 150px;
+  background: url('/cielo.gif') no-repeat center center;
+  background-size: cover;
+  --background: transparent;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
+
+.large-title {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  padding: 20px 0;
+}
+
+/* 🔹 Botón de retroceso */
+.custom-back-button {
+  margin-bottom: 2rem;
+  height: 44px;
+}
+
+.back-arrow {
+  width: 24px;
+  height: 24px;
 }
 
 .student-image-container {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  margin: 20px;
 }
 
 .student-image {
@@ -87,6 +126,7 @@ const student = { ...route.query };
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: zoom-in; 
 }
 
 .student-name {
@@ -111,16 +151,6 @@ const student = { ...route.query };
 .info-label {
   font-weight: bold;
   color: #555;
-}
-
-.custom-back-button {
-  margin-bottom: 2rem;
-  height: 44px;
-}
-
-.back-arrow {
-  width: 24px;
-  height: 24px;
 }
 
 .info-value {

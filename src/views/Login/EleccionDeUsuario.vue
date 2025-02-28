@@ -12,7 +12,6 @@
         <div class="buttons">
           <ion-button expand="block" fill="outline" class="button" router-link="/login/empresa/inicio">Compañía</ion-button>
           <ion-button expand="block" fill="outline" class="button" router-link="/login/profesor/inicio">Profesor</ion-button>
-          <ion-button expand="block" fill="outline" class="button" router-link="/login/alumno/inicio">Alumno</ion-button>
           <ion-button expand="block" fill="outline" class="button" router-link="/login/admin/inicio">Admin</ion-button>
         </div>
       </div>

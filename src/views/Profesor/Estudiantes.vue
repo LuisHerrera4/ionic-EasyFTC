@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar color="light" class="custom-toolbar">
+      <ion-toolbar class="custom-toolbar">
         <ion-title class="ion-text-center large-title">STUDENTS</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -11,7 +11,6 @@
         <img src="/back_arrow.svg" alt="back_arrow" class="back-arrow" />
       </ion-button>
 
-      <!-- Lista de estudiantes -->
       <ion-list>
         <ion-item
           v-for="student in students"
@@ -70,7 +69,7 @@ const students = ref([
   },
   {
     id: 3,
-    name: "Messi ",
+    name: "Messi",
     school: "Ins Puig Castellar",
     age: 17,
     education: "High School",
@@ -95,10 +94,17 @@ const goToStudent = (student: any) => {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap');
+
+* {
+  font-family: 'Lexend', sans-serif;
+}
 
 .custom-toolbar {
-  --min-height: 150px; /* Más alto para acomodar el texto grande */
-  background-color: #f8f9fa;
+  --min-height: 150px;
+  background: url('/cielo.gif') no-repeat center center;
+  background-size: cover;
+  --background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,7 +113,7 @@ const goToStudent = (student: any) => {
 .large-title {
   font-size: 40px;
   font-weight: bold;
-  color: #1e232c;
+  color: #ffffff;
   padding: 20px 0;
 }
 

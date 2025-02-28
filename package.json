@@ -20,9 +20,13 @@
     "@ionic/vue": "^8.4.3",
     "@ionic/vue-router": "^8.4.3",
     "ionicons": "^7.0.0",
+    "medium-zoom": "^1.1.0",
     "swiper": "^11.2.4",
     "vue": "^3.3.0",
-    "vue-router": "^4.2.0"
+    "vue-datepicker-next": "^1.0.3",
+    "vue-router": "^4.2.0",
+    "vue-zoom-img": "^1.0.2",
+    "vue3-tailwind-datepicker": "^1.0.16"
   },
   "devDependencies": {
     "@capacitor/cli": "7.0.1",
