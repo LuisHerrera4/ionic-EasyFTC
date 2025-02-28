@@ -9,7 +9,7 @@
 
         <!-- Navigation Tabs -->
         <div class="nav-tabs">
-          <router-link to="/empresa/Offers" class="tab-button" active-class="active">
+          <router-link to="/empresa/inicio" class="tab-button" active-class="active">
             <img src="/paper.png" alt="Offers" class="tab-icon" />
             <span>Offers</span>
           </router-link>
@@ -55,12 +55,18 @@ import { ref } from 'vue';
 import { IonPage, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
 
 const students = ref([
-  { name: 'Michal Jack', time: '28 mins ago', avatar: 'URL_DE_TU_IMAGEN_1', selected: false },
-  { name: 'Michal Jack', time: '28 mins ago', avatar: 'URL_DE_TU_IMAGEN_2', selected: false },
-  { name: 'Michal Jack', time: '28 mins ago', avatar: 'URL_DE_TU_IMAGEN_3', selected: true },
-  { name: 'Michal Jack', time: '28 mins ago', avatar: 'URL_DE_TU_IMAGEN_4', selected: false },
-  { name: 'Michal Jack', time: '28 mins ago', avatar: 'URL_DE_TU_IMAGEN_5', selected: false },
-  { name: 'Michal Jack', time: '28 mins ago', avatar: 'URL_DE_TU_IMAGEN_6', selected: false }
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario1.jpg', selected: false },
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario2.jpg', selected: false },
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario3.png', selected: true },
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario4.jpeg', selected: false },
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario2.jpg', selected: false },
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario3.png', selected: false },
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario1.jpg', selected: false },
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario2.jpg', selected: false },
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario3.png', selected: true },
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario4.jpeg', selected: false },
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario2.jpg', selected: false },
+  { name: 'Michal Jack', time: '28 mins ago', avatar: '/usuario3.png', selected: false }
 ]);
 
 const selectStudent = (index: number) => {
@@ -81,13 +87,12 @@ const selectStudent = (index: number) => {
 
 /* Encabezado con GIF de fondo */
 .students-header {
-  background-image: url('/tu-gif.gif'); /* Cambia esto por la ruta correcta de tu GIF */
+  background-image: url('/nubes.gif'); /* Cambia esto por la ruta correcta de tu GIF */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 150px;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
+
   display: flex;
   align-items: center;
   justify-content: center;

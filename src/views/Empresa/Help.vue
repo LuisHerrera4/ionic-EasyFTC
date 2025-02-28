@@ -1,10 +1,11 @@
 <template>
   <ion-page>
     <ion-header>
-  
-    <ion-toolbar class="custom-toolbar">
-      <ion-title class="ion-text-center">HELP</ion-title>
-    </ion-toolbar>
+     
+
+      <!-- Nuevo fondo animado (GIF) debajo del título HELP -->
+      <div class="gif-background">        <ion-title class="tituloh">HELP</ion-title>
+      </div>
 
       <!-- Tabs Navigation -->
       <div class="nav-tabs">
@@ -212,6 +213,13 @@ onMounted(() => {});
 
 <style scoped>
 /* Tabs Navigation */
+
+.tituloh {
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
 .nav-tabs {
   display: flex;
   justify-content: space-between;
@@ -320,13 +328,22 @@ onMounted(() => {});
   --min-height: 80px; /* Ajusta la altura */
 }
 
+/* Nuevo fondo animado debajo del título HELP */
+.gif-background {
+  width: 100%;
+  height: 200px; /* Ajusta la altura según necesidad */
+  background-image: url('/nubes.gif'); /* Asegúrate de que la ruta sea correcta */
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 1rem;
+}
+
 .section-title {
   text-align: absolute;
   margin-left: 10px; /* Ajusta este valor para moverlo más o menos a la derecha */
   font-size: 20px;
   font-weight: bold;
 }
-
 
 /* Purple border at the top of each slide */
 .swiper {

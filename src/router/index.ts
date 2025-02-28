@@ -51,6 +51,9 @@ import pantallaManejoEmpresa from '../views/Admin/manejoEmpresa.vue'
 import pantallaManejoEmpresaOfertas from '../views/Admin/manejoOfertasEmpresa.vue'
 import pantallaManejoProfesor from '../views/Admin/manejoProfesor.vue'
 import manejoProfesorAlumnos from '../views/Admin/manejoProfesorAlumnos.vue'
+import { Component } from 'ionicons/dist/types/stencil-public-runtime';
+import Ofertas from '../views/Profesor/Ofertas.vue';
+import OfertasE from '../views/Empresa/OfertasE.vue'
 
 
 
@@ -245,6 +248,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin/manejoProfesorAlumnos',
     name: 'manejoProfesorAlumnos',
     component: manejoProfesorAlumnos
+  },
+  {
+    path: '/empresa/OfertasE',
+    name: 'ofertase',
+    component: OfertasE
   }
 ];
 
