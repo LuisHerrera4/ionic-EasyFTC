@@ -6,7 +6,7 @@
         <img src="/logo.gif" alt="Logo" class="logo" />
         
         <!-- Título -->
-        <h1 class="title">EasyFTC</h1>
+        <h1 class="title">EasyFCT</h1>
         
         <!-- Botones -->
         <div class="buttons">
