@@ -5,7 +5,6 @@ import HomePage from '../views/HomePage.vue';
 // Importar las vistas correspondientes
 import EmpresaInicio from '../views/Login/Empresa/Inicio.vue';
 import ProfesorInicio from '../views/Login/Profesor/Inicio.vue';
-import AlumnosInicio from '../views/Login/Alumnos/Inicio.vue';
 import AdminLogin from '../views/Login/Admin/Login.vue';
 
 // Importar las vistas de Login y Register

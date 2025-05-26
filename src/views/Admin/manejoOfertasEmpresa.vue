@@ -78,7 +78,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const goBack = () => {
-  router.back();
+  router.push('/admin/manejoEmpresa');
 };
 
 const offerTitle = ref("");

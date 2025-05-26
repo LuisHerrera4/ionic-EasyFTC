@@ -2,31 +2,26 @@
   <ion-page>
     <ion-content :fullscreen="true">
       <div class="login-container">
-        <!-- Back button -->
         <div class="back-button-container">
-          <ion-button fill="clear" class="back-button">
-            <ion-icon :icon="chevronBackOutline"></ion-icon>
+          <ion-button fill="clear" class="back-button" @click="goBack">
+            <img src="/back_arrow.svg" alt="Back" class="back-icon" />
           </ion-button>
         </div>
 
-        <!-- Logo and title -->
+        <!-- Logo y título -->
         <div class="logo-container">
           <img src="/logo.gif" alt="EasyFCT Logo" class="logo-image" />
           <h1 class="app-title">EasyFCT</h1>
         </div>
 
-        <!-- Form -->
+        <!-- Formulario -->
         <div class="form-container">
-          <!-- Email input -->
+          <!-- Campo de Email -->
           <ion-item class="custom-input">
-            <ion-input
-              type="email"
-              placeholder="Email"
-              v-model="email"
-            ></ion-input>
+            <ion-input type="email" placeholder="Email" v-model="email"></ion-input>
           </ion-item>
 
-          <!-- Password input -->
+          <!-- Campo de Password -->
           <ion-item class="custom-input">
             <ion-input
               :type="showPassword ? 'text' : 'password'"
@@ -36,7 +31,7 @@
             <div class="eye-icon" @click="togglePasswordVisibility">
               <img 
                 v-if="showPassword" 
-                src="/eye_close.png" 
+                src="/eye_open.png" 
                 alt="Hide Password" 
                 class="eye-image"
               />
@@ -49,7 +44,7 @@
             </div>
           </ion-item>
 
-          <!-- Login button -->
+          <!-- Botón de Login -->
           <ion-button expand="block" class="login-button" router-link="/admin/administrarCuentas">
             Login
           </ion-button>
@@ -61,29 +56,24 @@
 
 <script setup>
 import { ref } from 'vue';
-import { 
-  IonPage, 
-  IonContent, 
-  IonButton, 
-  IonItem, 
-  IonInput, 
-  IonIcon 
-} from '@ionic/vue';
-import { chevronBackOutline } from 'ionicons/icons';
+import { useRouter } from 'vue-router';
+import { IonPage, IonContent, IonButton, IonItem, IonInput } from '@ionic/vue';
 
 // Estado
 const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
 
+// Hook de navegación
+const router = useRouter();
+
 // Métodos
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
 
-const login = () => {
-  // Implementar lógica de login aquí
-  console.log('Login con:', email.value, password.value);
+const goBack = () => {
+  router.back();
 };
 </script>
 
@@ -109,6 +99,12 @@ const login = () => {
   --background: #f7f8f9;
   --color: #1e232c;
   --box-shadow: none;
+}
+
+/* Estilo para la imagen del botón de regreso */
+.back-icon {
+  width: 24px;
+  height: 24px;
 }
 
 .logo-container {

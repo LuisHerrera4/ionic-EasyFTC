@@ -39,6 +39,13 @@
         <!-- Form Content (AHORA MÁS ARRIBA) -->
         <div class="form-content">
           <div class="form-card">
+            <ion-button 
+              fill="clear" 
+              class="back-button-form" 
+              @click="navigateTo('home')"
+            >
+              <ion-icon name="arrow-back" slot="icon-only"> ←</ion-icon>
+            </ion-button>
             <h2 class="form-title">Create New Offer</h2>
             
             <div class="form-group">
@@ -117,7 +124,8 @@ import {
   IonItem, 
   IonLabel, 
   IonSelect, 
-  IonSelectOption
+  IonSelectOption,
+  IonIcon
 } from '@ionic/vue';
 
 const activeTab = ref('offers');
@@ -213,6 +221,15 @@ const publishOffer = () => {
   margin-top: -20px; /* Eleva el formulario */
 }
 
+.back-button-form {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #666;
+  --color: #666;
+  z-index: 10;
+}
+
 .form-card {
   background-color: white;
   border-radius: 10px;
@@ -220,6 +237,7 @@ const publishOffer = () => {
   padding: 1.5rem;
   width: 100%;
   max-width: 550px;
+  position: relative;
 }
 
 .form-group {

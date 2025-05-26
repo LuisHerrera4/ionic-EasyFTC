@@ -47,7 +47,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const goBack = () => {
-  router.go(-1);
+  router.push('/admin/AdministrarCuentas');
 };
 
 const professors = ref([
@@ -60,22 +60,14 @@ const professors = ref([
 ]);
 
 const goToStudentProfile = (student) => {
-  router.push({
-    path: "/admin/manejoProfesorAlumnos",
-    query: {
-      id: student.id,
-      name: student.name,
-      avatar: student.avatar,
-    },
-  });
+  router.push(`/admin/manejoProfesorAlumnos?id=${student.id}&name=${encodeURIComponent(student.name)}&avatar=${encodeURIComponent(student.avatar)}`);
 };
-
 const deleteSelectedProfessors = () => {
   professors.value = professors.value.filter((professor) => !professor.selected);
 };
 
 const addStudent = () => {
-  router.push({ path: "/admin/manejoProfesorAlumnos", query: { newStudent: true } });
+  router.push('/admin/manejoProfesorAlumnos?newStudent=true');
 };
 </script>
 

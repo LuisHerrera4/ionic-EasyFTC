@@ -8,6 +8,14 @@
 
     <ion-content>
       <div class="offers-container">
+        <ion-button 
+          fill="clear" 
+          class="back-button-form" 
+          @click="navigateToHome"
+        >
+          <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+        </ion-button>
+        
         <div v-for="(offer, index) in offers" :key="index" class="offer-item">
           <div class="offer-info">
             <h2 class="offer-title">{{ offer.title }}</h2>
@@ -27,9 +35,13 @@ import {
   IonToolbar, 
   IonTitle, 
   IonContent,
-  IonButton
+  IonButton,
+  IonIcon
 } from '@ionic/vue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const offers = ref([
   { title: 'Programmer Database', subtitle: 'For students DAM' },
@@ -39,6 +51,10 @@ const offers = ref([
   { title: 'Laptop Technician', subtitle: 'For students ASIX' },
   { title: 'Programmer Python', subtitle: 'For students DAM' }
 ]);
+
+const navigateToHome = () => {
+  router.push('/home');
+};
 </script>
 
 <style scoped>
@@ -60,6 +76,15 @@ const offers = ref([
 
 .offers-container {
   padding: 16px;
+  position: relative;
+}
+
+.back-button-form {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #666;
+  z-index: 10;
 }
 
 .offer-item {

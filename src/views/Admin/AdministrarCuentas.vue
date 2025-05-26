@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <!-- 🔹 Toolbar con GIF -->
+    <!-- Toolbar con imagen de fondo -->
     <ion-header>
       <ion-toolbar class="custom-toolbar">
         <ion-title class="ion-text-center large-title">Manage Accounts</ion-title>
@@ -8,18 +8,26 @@
     </ion-header>
 
     <ion-content class="ion-padding">
-      <!-- 🔹 Contenedor de la imagen del laptop -->
+      <!-- Contenedor de la imagen del laptop -->
       <div class="laptop-container">
         <img src="/ordenador.gif" alt="Laptop" class="laptop-image" />
       </div>
 
-      <!-- 🔹 Contenedor de botones -->
+      <!-- Contenedor de botones -->
       <div class="buttons-container">
-        <ion-button class="custom-button" expand="block" router-link="/admin/manejoEmpresa">
+        <ion-button
+          class="custom-button"
+          expand="block"
+          @click="goTo({ path: '/admin/manejoEmpresa' })"
+        >
           Manage Company
         </ion-button>
 
-        <ion-button class="custom-button" expand="block" router-link="/admin/manejoProfesor">
+        <ion-button
+          class="custom-button"
+          expand="block"
+          @click="goTo({ path: '/admin/manejoProfesor' })"
+        >
           Manage Professor
         </ion-button>
       </div>
@@ -28,18 +36,25 @@
 </template>
 
 <script setup>
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from "@ionic/vue";
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const goTo = (destination) => {
+  router.push(destination);
+};
 </script>
 
 <style scoped>
-/* 🔹 Fuente Lexend */
+/* 🔹 Importar fuente Lexend */
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap");
 
 * {
   font-family: "Lexend", sans-serif;
 }
 
-/* 🔹 Toolbar con GIF */
+/* 🔹 Estilo para la toolbar con GIF */
 .custom-toolbar {
   --min-height: 150px;
   background: url("/cieloAdmin.gif") no-repeat center center;
@@ -78,7 +93,7 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from 
   max-width: 450px;
 }
 
-/* 🔹 Botones personalizados */
+/* 🔹 Estilo de los botones personalizados */
 .custom-button {
   --background: transparent;
   --background-hover: #4a7bff10;

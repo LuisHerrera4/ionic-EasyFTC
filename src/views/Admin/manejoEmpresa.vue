@@ -51,7 +51,7 @@ const router = useRouter();
 const activeMenuIndex = ref(null);
 
 const goBack = () => {
-  router.go(-1);
+  router.push('/admin/AdministrarCuentas');
 };
 
 const offers = ref([
@@ -68,9 +68,8 @@ const toggleMenu = (index) => {
 };
 
 const editOffer = (offer) => {
-  router.push({ path: '/admin/manejoEmpresaOfertas', query: { title: offer.title, forStudents: offer.forStudents } });
+  router.push(`/admin/manejoEmpresaOfertas?title=${encodeURIComponent(offer.title)}&forStudents=${encodeURIComponent(offer.forStudents)}`);
 };
-
 const deleteOffer = (index) => {
   offers.value.splice(index, 1);
   activeMenuIndex.value = null;
